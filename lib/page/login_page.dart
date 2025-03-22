@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 //5
 class LoginPage extends StatelessWidget {
   final TextEditingController _emailController =
-      TextEditingController(text: 'test2@gmail.com');
+      TextEditingController(text: 'test@gmail.com');
   final TextEditingController _passwordController =
       TextEditingController(text: 'password');
   LoginPage({super.key});

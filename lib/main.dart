@@ -1,3 +1,4 @@
+import 'package:chatapp_supabase/auth/auth_gate.dart';
 import 'package:chatapp_supabase/page/login_page.dart';
 import 'package:chatapp_supabase/page/register_page.dart';
 import 'package:chatapp_supabase/theme/light_mod.dart';
@@ -5,8 +6,6 @@ import 'package:chatapp_supabase/theme/light_mod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-
-// Import the firebase_app_check plugin
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +43,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/login',
         );
       },
-      child: LoginPage(),
+      child: AuthGate(),
     );
   }
 }
