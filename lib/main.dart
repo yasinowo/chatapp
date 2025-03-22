@@ -1,41 +1,19 @@
-import 'package:emailapp/auth/auth_gate.dart';
-import 'package:emailapp/firebase_options.dart';
-import 'package:emailapp/page/login_page.dart';
-import 'package:emailapp/page/register_page.dart';
-import 'package:emailapp/theme/light_mod.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:chatapp_supabase/page/login_page.dart';
+import 'package:chatapp_supabase/page/register_page.dart';
+import 'package:chatapp_supabase/theme/light_mod.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 // Import the firebase_app_check plugin
-import 'package:firebase_app_check/firebase_app_check.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  // await FirebaseAppCheck.instance.activate(
-  //   // You can also use a `ReCaptchaEnterpriseProvider` provider instance as an
-  //   // argument for `webProvider`
-  //   webProvider: ReCaptchaV3Provider('recaptcha-v3-site-key'),
-  //   // Default provider for Android is the Play Integrity provider. You can use the "AndroidProvider" enum to choose
-  //   // your preferred provider. Choose from:
-  //   // 1. Debug provider
-  //   // 2. Safety Net provider
-  //   // 3. Play Integrity provider
-  //   androidProvider: AndroidProvider.debug,
-  //   // Default provider for iOS/macOS is the Device Check provider. You can use the "AppleProvider" enum to choose
-  //   // your preferred provider. Choose from:
-  //   // 1. Debug provider
-  //   // 2. Device Check provider
-  //   // 3. App Attest provider
-  //   // 4. App Attest provider with fallback to Device Check provider (App Attest provider is only available on iOS 14.0+, macOS 14.0+)
-  //   appleProvider: AppleProvider.appAttest,
-  // );
-
+  await Supabase.initialize(
+      url: 'https://fuwxrwsrflpahrtjmgyq.supabase.co',
+      anonKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1d3hyd3NyZmxwYWhydGptZ3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NTU5MzYsImV4cCI6MjA1ODIzMTkzNn0.Ajc3XOLdlSCyekSJLx3_bdDrTqcHftt5D0uRHEyifhA');
   runApp(const MyApp());
 }
 
@@ -66,7 +44,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/login',
         );
       },
-      child: AuthGate(),
+      child: LoginPage(),
     );
   }
 }

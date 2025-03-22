@@ -1,6 +1,6 @@
-import 'package:emailapp/auth/auth_service.dart';
-import 'package:emailapp/components/button_global.dart';
-import 'package:emailapp/components/textfild_global.dart';
+import 'package:chatapp_supabase/auth/auth_service.dart';
+import 'package:chatapp_supabase/components/button_global.dart';
+import 'package:chatapp_supabase/components/textfild_global.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,10 +19,12 @@ class LoginPage extends StatelessWidget {
 
     // try login
     try {
-      await authService.signInWithEmailAndPassword(
-        _emailController.text,
-        _passwordController.text,
-      );
+      await authService.signInWithEmail(
+          _emailController.text, _passwordController.text);
+      // await authService.signInWithEmailAndPassword(
+      //   _emailController.text,
+      //   _passwordController.text,
+      // );
     }
 
     // catch any errors

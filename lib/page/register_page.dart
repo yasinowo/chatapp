@@ -1,5 +1,6 @@
-import 'package:emailapp/components/button_global.dart';
-import 'package:emailapp/components/textfild_global.dart';
+import 'package:chatapp_supabase/components/button_global.dart';
+import 'package:chatapp_supabase/components/textfild_global.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
