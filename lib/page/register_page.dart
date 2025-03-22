@@ -1,5 +1,7 @@
+import 'package:chatapp_supabase/auth/auth_service.dart';
 import 'package:chatapp_supabase/components/button_global.dart';
 import 'package:chatapp_supabase/components/textfild_global.dart';
+import 'package:chatapp_supabase/page/home_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,9 +13,41 @@ class RegisterPage extends StatelessWidget {
       TextEditingController();
   RegisterPage({super.key});
 
-  //register method
-  void register() {}
-  //push to login page
+// register method
+  void register(BuildContext context) {
+    // get auth service
+    final _auth = AuthService();
+
+    // passwords match -> create user
+    if (_passwordController.text == _confirmPasswordController.text) {
+      try {
+        _auth.signUpWithEmailAndPassword(
+          _emailController.text,
+          _passwordController.text,
+        );
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      } catch (e) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(e.toString()),
+          ), // AlertDialog
+        );
+      }
+    }
+    // passwords dont match -> tell user to fix
+    else {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text("Passwords don't match!"),
+        ), // AlertDialog
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +95,7 @@ class RegisterPage extends StatelessWidget {
             ),
             SizedBox(height: 15.h),
             // login button
-            ButtonGlobal(text: 'Register', onTap: register),
+            ButtonGlobal(text: 'Register', onTap: () => register(context)),
             SizedBox(height: 15.h),
             // register now
             Row(

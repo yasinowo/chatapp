@@ -1,4 +1,5 @@
 import 'package:chatapp_supabase/auth/auth_gate.dart';
+import 'package:chatapp_supabase/page/home_page.dart';
 import 'package:chatapp_supabase/page/login_page.dart';
 import 'package:chatapp_supabase/page/register_page.dart';
 import 'package:chatapp_supabase/theme/light_mod.dart';
@@ -12,7 +13,11 @@ void main() async {
   await Supabase.initialize(
       url: 'https://fuwxrwsrflpahrtjmgyq.supabase.co',
       anonKey:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1d3hyd3NyZmxwYWhydGptZ3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NTU5MzYsImV4cCI6MjA1ODIzMTkzNn0.Ajc3XOLdlSCyekSJLx3_bdDrTqcHftt5D0uRHEyifhA');
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1d3hyd3NyZmxwYWhydGptZ3lxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NTU5MzYsImV4cCI6MjA1ODIzMTkzNn0.Ajc3XOLdlSCyekSJLx3_bdDrTqcHftt5D0uRHEyifhA',
+      authOptions: FlutterAuthClientOptions(
+          //  autoRefreshToken: true, //   رفرش خودکار توکن
+          //detectSessionInUri: true,
+          ));
   runApp(const MyApp());
 }
 
@@ -35,7 +40,7 @@ class MyApp extends StatelessWidget {
           title: 'title',
           // You can use the library anywhere in the app even in theme
           theme: lightMode,
-          home: child,
+          home: HomePage(),
           routes: {
             '/login': (context) => LoginPage(),
             '/register': (context) => RegisterPage(),
@@ -43,7 +48,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/login',
         );
       },
-      child: AuthGate(),
+      // child: HomePage(),
     );
   }
 }
