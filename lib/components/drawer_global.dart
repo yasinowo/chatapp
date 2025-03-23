@@ -1,9 +1,15 @@
+import 'package:chatapp_supabase/services/auth/auth_service.dart';
 import 'package:chatapp_supabase/page/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DrawerGlobal extends StatelessWidget {
   const DrawerGlobal({super.key});
+  void logout(BuildContext context) {
+    // get auth service
+    final auth = AuthService();
+    auth.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +94,7 @@ class DrawerGlobal extends StatelessWidget {
               ),
               onTap: () {
                 Navigator.pop(context);
+                logout(context);
               },
             ), // ListTile
           ), // Padding

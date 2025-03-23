@@ -1,4 +1,4 @@
-import 'package:chatapp_supabase/auth/auth_service.dart';
+import 'package:chatapp_supabase/services/auth/auth_service.dart';
 import 'package:chatapp_supabase/components/button_global.dart';
 import 'package:chatapp_supabase/components/textfild_global.dart';
 import 'package:chatapp_supabase/page/home_page.dart';
