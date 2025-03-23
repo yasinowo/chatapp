@@ -33,7 +33,7 @@ class AuthService {
       final response = await _auth.auth.signUp(
         email: email,
         password: password,
-        //    data: {'username': username},
+        data: {'username': username},
       );
       print('ورود موفقیت‌آمیز: ${response.user!.email}');
       //save user info in supabase doc
@@ -42,9 +42,9 @@ class AuthService {
         'email': email,
       });
     } on AuthException catch (error) {
-      throw ('auth error : $error');
+      throw ('auth error : ${error.message}');
     } catch (error) {
-      throw ('خطا در ورود: $error');
+      throw ('خطا در ورود: ${error.toString()}');
     }
   }
 
