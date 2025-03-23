@@ -21,7 +21,7 @@ class _AuthGateState extends State<AuthGate> {
 
           // user login before
           if (session != null) {
-            return const HomePage();
+            return HomePage();
           }
 
           return LoginPage();

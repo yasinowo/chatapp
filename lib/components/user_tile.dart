@@ -20,7 +20,12 @@ class UserTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ), // BoxDecoration
         child: Row(
-          children: [],
+          children: [
+            // icon
+            Icon(Icons.person),
+            // text
+            Text(text)
+          ],
         ), // Row
       ), // Container
     ); // GestureDetector

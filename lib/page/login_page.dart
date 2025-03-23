@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
           _emailController.text, _passwordController.text);
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
     }
 
