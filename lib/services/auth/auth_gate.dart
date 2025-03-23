@@ -1,4 +1,6 @@
 import 'package:chatapp_supabase/page/chat_page.dart';
+import 'package:chatapp_supabase/page/chat_page2.dart';
+import 'package:chatapp_supabase/page/chat_page3.dart';
 import 'package:chatapp_supabase/page/home_page.dart';
 import 'package:chatapp_supabase/page/login_page.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,7 @@ class _AuthGateState extends State<AuthGate> {
 
           // user login before
           if (session != null) {
-            return ChatPage();
+            return ChatPage2();
           }
 
           return LoginPage();

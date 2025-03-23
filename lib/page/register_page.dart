@@ -1,3 +1,6 @@
+import 'package:chatapp_supabase/page/chat_page.dart';
+import 'package:chatapp_supabase/page/chat_page2.dart';
+import 'package:chatapp_supabase/page/chat_page3.dart';
 import 'package:chatapp_supabase/services/auth/auth_service.dart';
 import 'package:chatapp_supabase/components/button_global.dart';
 import 'package:chatapp_supabase/components/textfild_global.dart';
@@ -32,7 +35,7 @@ class RegisterPage extends StatelessWidget {
         );
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => ChatPage3()),
         );
       } catch (e) {
         showDialog(

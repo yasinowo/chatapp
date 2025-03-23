@@ -15,7 +15,6 @@ class AuthService {
 
       if (response.user != null) {
         print('ورود موفقیت‌آمیز: ${response.user!.email}');
-        //
         //   print(_auth.auth.currentSession?.accessToken);
         await Supabase.instance.client.from('Users').upsert({
           'id': response.user!.id,
@@ -37,10 +36,6 @@ class AuthService {
       );
       print('ورود موفقیت‌آمیز: ${response.user!.email}');
       //save user info in supabase doc
-      await Supabase.instance.client.from('Users').upsert({
-        'id': response.user!.id,
-        'email': email,
-      });
     } on AuthException catch (error) {
       throw ('auth error : ${error.message}');
     } catch (error) {

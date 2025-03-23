@@ -1,24 +1,35 @@
+import 'package:chatapp_supabase/model/profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 final supabase = Supabase.instance.client;
 
-class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+class ChatPage2 extends StatefulWidget {
+  const ChatPage2({super.key});
+
+  static Route<void> route() {
+    return MaterialPageRoute(
+      builder: (context) => const ChatPage2(),
+    );
+  }
 
   @override
-  State<ChatPage> createState() => _ChatPageState();
+  State<ChatPage2> createState() => _ChatPage2State();
 }
 
-class _ChatPageState extends State<ChatPage> {
-  late final Stream<List<Message>> _messagesStream;
-  final TextEditingController _textController = TextEditingController();
+class _ChatPage2State extends State<ChatPage2> {
+  Stream<List<Message>> _messagesStream = Stream.empty(); // مقدار اولیه
+  final Map<String, Profile> _profileCache = {};
   final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    _initializeMessagesStream();
+  }
+
+  void _initializeMessagesStream() {
     final user = supabase.auth.currentUser;
     if (user == null) {
       print("❌ خطا: کاربر لاگین نکرده است.");
@@ -26,38 +37,14 @@ class _ChatPageState extends State<ChatPage> {
     }
     final myUserId = user.id;
 
-    _messagesStream = supabase
-        .from('messages')
-        .stream(primaryKey: ['id'])
-        .order('created_at')
-        .map((maps) => maps
-            .map((map) => Message.fromMap(map: map, myUserId: myUserId))
-            .toList());
-  }
-
-  void _sendMessage() async {
-    final text = _textController.text.trim();
-    if (text.isEmpty) return;
-
-    final user = supabase.auth.currentUser;
-    if (user == null) {
-      print("❌ خطا: کاربر لاگین نکرده است.");
-      return;
-    }
-
-    _textController.clear();
-    await supabase.from('messages').insert({
-      'profile_id': user.id,
-      'content': text,
-      'created_at': DateTime.now().toIso8601String(),
-    });
-
-    Future.delayed(Duration(milliseconds: 300), () {
-      _scrollController.animateTo(
-        _scrollController.position.maxScrollExtent,
-        duration: Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
+    setState(() {
+      _messagesStream = supabase
+          .from('messages')
+          .stream(primaryKey: ['id'])
+          .order('created_at')
+          .map((maps) => maps
+              .map((map) => Message.fromMap(map: map, myUserId: myUserId))
+              .toList());
     });
   }
 
@@ -74,12 +61,10 @@ class _ChatPageState extends State<ChatPage> {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
-
                 final messages = snapshot.data!;
                 if (messages.isEmpty) {
                   return const Center(child: Text("شروع به چت کنید 📩"));
                 }
-
                 return ListView.builder(
                   controller: _scrollController,
                   reverse: true,
@@ -98,6 +83,8 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _buildMessageBar() {
+    final TextEditingController textController = TextEditingController();
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -105,7 +92,7 @@ class _ChatPageState extends State<ChatPage> {
           children: [
             Expanded(
               child: TextField(
-                controller: _textController,
+                controller: textController,
                 decoration: const InputDecoration(
                   hintText: "پیام خود را تایپ کنید...",
                   border: OutlineInputBorder(),
@@ -114,7 +101,28 @@ class _ChatPageState extends State<ChatPage> {
             ),
             IconButton(
               icon: const Icon(Icons.send),
-              onPressed: _sendMessage,
+              onPressed: () async {
+                final text = textController.text.trim();
+                if (text.isEmpty) return;
+
+                final user = supabase.auth.currentUser;
+                if (user == null) return;
+
+                textController.clear();
+                await supabase.from('messages').insert({
+                  'profile_id': user.id,
+                  'content': text,
+                  'created_at': DateTime.now().toIso8601String(),
+                });
+
+                Future.delayed(const Duration(milliseconds: 300), () {
+                  _scrollController.animateTo(
+                    _scrollController.position.maxScrollExtent,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                  );
+                });
+              },
             )
           ],
         ),
