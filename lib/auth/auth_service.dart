@@ -24,14 +24,13 @@ class AuthService {
   }
 
   // sign up
-  Future<AuthResponse> signUpWithEmailAndPassword(
-      String email, password) async {
+  Future signUpWithEmailAndPassword(String email, password) async {
     try {
       final response = await _auth.auth.signUp(
         email: email,
         password: password,
       );
-      return response;
+      print('ورود موفقیت‌آمیز: ${response.user!.email}');
     } on AuthException catch (error) {
       throw ('auth error : $error');
     } catch (error) {
