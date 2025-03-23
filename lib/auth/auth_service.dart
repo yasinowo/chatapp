@@ -32,6 +32,8 @@ class AuthService {
         password: password,
       );
       return response;
+    } on AuthException catch (error) {
+      throw ('auth error : $error');
     } catch (error) {
       throw ('خطا در ورود: $error');
     }

@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  void logout() {
+  void logout(BuildContext context) {
     // get auth service
-    final auth = AuthService();
-    auth.signOut();
+    final _auth = AuthService();
+    _auth.signOut();
+    // navigate to login page
+    // Navigator.pushReplacementNamed(context, '/login');
   }
 
   @override
@@ -17,7 +19,8 @@ class HomePage extends StatelessWidget {
         title: const Text("Home"),
         actions: [
           // logout button
-          IconButton(onPressed: logout, icon: const Icon(Icons.logout)),
+          IconButton(
+              onPressed: () => logout(context), icon: const Icon(Icons.logout)),
         ],
       ), // AppBar
     ); // Scaffold

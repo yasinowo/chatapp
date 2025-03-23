@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RegisterPage extends StatelessWidget {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController =
+      TextEditingController(text: 'yasinforcollege@gmail.com');
+  final TextEditingController _passwordController =
+      TextEditingController(text: 'password');
   final TextEditingController _confirmPasswordController =
-      TextEditingController();
+      TextEditingController(text: 'password');
   RegisterPage({super.key});
 
 // register method

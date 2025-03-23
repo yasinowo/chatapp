@@ -17,12 +17,13 @@ class _AuthGateState extends State<AuthGate> {
       body: StreamBuilder(
         stream: Supabase.instance.client.auth.onAuthStateChange,
         builder: (context, snapshot) {
-          // ✅ اگر کاربر لاگین کرده باشد
-          if (snapshot.hasData) {
+          final session = Supabase.instance.client.auth.currentSession;
+
+          // user login before
+          if (session != null) {
             return const HomePage();
           }
 
-          // ❌ در غیر این صورت، به صفحه لاگین برو
           return LoginPage();
         },
       ),
