@@ -28,11 +28,12 @@ class AuthService {
   }
 
   // sign up
-  Future signUpWithEmailAndPassword(String email, password) async {
+  Future signUpWithEmailAndPassword(String email, password, username) async {
     try {
       final response = await _auth.auth.signUp(
         email: email,
         password: password,
+        //    data: {'username': username},
       );
       print('ورود موفقیت‌آمیز: ${response.user!.email}');
       //save user info in supabase doc

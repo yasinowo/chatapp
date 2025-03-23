@@ -13,6 +13,8 @@ class RegisterPage extends StatelessWidget {
       TextEditingController(text: 'password');
   final TextEditingController _confirmPasswordController =
       TextEditingController(text: 'password');
+  final TextEditingController _usernameController =
+      TextEditingController(text: 'yasin1');
   RegisterPage({super.key});
 
 // register method
@@ -26,6 +28,7 @@ class RegisterPage extends StatelessWidget {
         _auth.signUpWithEmailAndPassword(
           _emailController.text,
           _passwordController.text,
+          _usernameController.text,
         );
         Navigator.pushReplacement(
           context,
@@ -76,6 +79,12 @@ class RegisterPage extends StatelessWidget {
               ), // TextStyle
             ), // Text
             SizedBox(height: 25.h),
+            TextFieldGlobal(
+              hintText: 'Username',
+              obscureText: false,
+              controller: _usernameController,
+            ),
+            SizedBox(height: 15.h),
             // email textfield
             TextFieldGlobal(
               hintText: 'Email',
