@@ -166,7 +166,7 @@ class _MessageBarState extends State<_MessageBar> {
     final text = _textController.text;
     final user = supabase.auth.currentUser;
     if (user == null) {
-      print("❌ خطا: کاربر لاگین نکرده است.");
+      print("❌ خطا: کاربر لاگین نکرده است. user null");
       return;
     }
 
